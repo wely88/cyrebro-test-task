@@ -86,6 +86,10 @@ export const DataTable = () => {
 							autoHeight={true}
 							sortingMode={'server'}
 							pageSize={5}
+							disableSelectionOnClick={true}
+							disableDensitySelector={true}
+							disableColumnSelector={true}
+							disableColumnMenu={true}
 							onSortModelChange={(GridSortModelParams) => handleSortColumn(GridSortModelParams)}
 						/>
 					</div>

@@ -1,0 +1,29 @@
+.loader-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.table {
+	display: flex;
+	flex-direction: column;
+	padding: 50px 100px;
+	height: 100%;
+
+	&__header {
+		font-size: 32px;
+    font-weight: 600;
+    color: #3f51b5;
+    font-family: "Roboto",sans-serif;
+	}
+
+	&__search {
+		margin-bottom: 40px;
+	}
+
+	&__data {
+		// height: calc(100% - 92px);
+	}
+}

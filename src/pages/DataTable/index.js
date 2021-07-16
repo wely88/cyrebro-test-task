@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
 
 //Components
 import { DataGrid } from '@material-ui/data-grid';
 import { TextField, InputAdornment } from '@material-ui/core';
 import { Loader } from '../../components/Loader';
 import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
+
+//Redux
+import { allUsersSelector, filteredUsersSelector } from '../../redux/store/users/selectors';
+import { loadingSelector, errorSelector } from '../../redux/store/system/selectors';
+import { getAllUsers, setSearch, setOrder } from "../../redux/store/users/actions";
 
 //Styles
 import './index.scss';
@@ -21,31 +25,28 @@ const columns = [
 ];
 
 export const DataTable = () => {
-
-	const [data, setData] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const dispatch = useDispatch();
+  const allUsers = useSelector(allUsersSelector);
+	const filteredUsers = useSelector(filteredUsersSelector);
+	const error = useSelector(errorSelector);
+	const loading = useSelector(loadingSelector);
+	const [isSearchActive, setIsSearchActive] = useState(false);
 
 	useEffect(() => {
-		axios.get(`https://jsonplaceholder.typicode.com/users`)
-			.then((res) => {
-				setData(res.data)
-				setLoading(false);
-			})
-			.catch((error) => {
-				console.log(error);
-			})
-	}, [])
+		dispatch(getAllUsers());
+	}, [dispatch])
 
 	const handleSortColumn = (GridSortModelParams) => {
-		const column = GridSortModelParams.sortModel.length ? GridSortModelParams.sortModel[0]?.field : 'id';
-		const order = GridSortModelParams.sortModel[0]?.sort;
-	
-		const sortedData = order === 'desc' ?
-			data.slice().sort((a,b) => (b[column] > a[column]) ? 1 : ((a[column] > b[column]) ? -1 : 0))
-			:
-			data.slice().sort((a,b) => (a[column] > b[column]) ? 1 : ((b[column] > a[column]) ? -1 : 0))
+		dispatch(setOrder(GridSortModelParams));
+	}
 
-		setData(sortedData)
+	const handleSearch = (event) => {
+		if (event.target.value.length) {
+			dispatch(setSearch(event.target.value));
+			setIsSearchActive(true);
+		} else {
+			setIsSearchActive(false);
+		}
 	}
 
   return (
@@ -55,6 +56,9 @@ export const DataTable = () => {
 				<div className="loader-wrapper">
 					<Loader />
 				</div>
+				:
+				error ? 
+				<div className="error-wrapper">Something went wrong...</div>
 				:
 				<div className="table">
 					<h2 className="table__header">Table Data</h2>
@@ -70,19 +74,14 @@ export const DataTable = () => {
 								<InputAdornment position="start">
 									<SearchIcon />
 								</InputAdornment>
-							),
-							endAdornment: (
-								<InputAdornment position="end">
-									<CloseIcon/> 
-								</InputAdornment> 
-							),
+							)
 						}} 
-						//onChange={(event) => handleSearch(event)}
+						onChange={(event) => handleSearch(event)}
 					/>
 					</div>
 					<div className="table__data">
 						<DataGrid
-							rows={data} 
+							rows={isSearchActive ? filteredUsers : allUsers} 
 							columns={columns} 
 							autoHeight={true}
 							sortingMode={'server'}

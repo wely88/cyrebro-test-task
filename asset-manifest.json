@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cyrebro-test-task/static/css/main.09b5949a.chunk.css",
+    "main.js": "/cyrebro-test-task/static/js/main.76373a0e.chunk.js",
+    "main.js.map": "/cyrebro-test-task/static/js/main.76373a0e.chunk.js.map",
+    "runtime-main.js": "/cyrebro-test-task/static/js/runtime-main.a07053d8.js",
+    "runtime-main.js.map": "/cyrebro-test-task/static/js/runtime-main.a07053d8.js.map",
+    "static/js/2.24316443.chunk.js": "/cyrebro-test-task/static/js/2.24316443.chunk.js",
+    "static/js/2.24316443.chunk.js.map": "/cyrebro-test-task/static/js/2.24316443.chunk.js.map",
+    "static/js/3.1fc0ca40.chunk.js": "/cyrebro-test-task/static/js/3.1fc0ca40.chunk.js",
+    "static/js/3.1fc0ca40.chunk.js.map": "/cyrebro-test-task/static/js/3.1fc0ca40.chunk.js.map",
+    "index.html": "/cyrebro-test-task/index.html",
+    "static/css/main.09b5949a.chunk.css.map": "/cyrebro-test-task/static/css/main.09b5949a.chunk.css.map",
+    "static/js/2.24316443.chunk.js.LICENSE.txt": "/cyrebro-test-task/static/js/2.24316443.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a07053d8.js",
+    "static/js/2.24316443.chunk.js",
+    "static/css/main.09b5949a.chunk.css",
+    "static/js/main.76373a0e.chunk.js"
+  ]
+}
